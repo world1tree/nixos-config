@@ -14,7 +14,7 @@
       flake = false;
     };
   };
-  outputs = { self, nixpkgs, agenix, home-manager, disko, secrets } @inputs:
+  outputs = { self, nixpkgs, agenix, home-manager, disko, secrets, ... } @inputs:
     let
       user = "zaiheshi";
       linuxSystems = [ "x86_64-linux" "aarch64-linux" ];
