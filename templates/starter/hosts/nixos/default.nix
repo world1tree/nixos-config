@@ -30,8 +30,7 @@ let user = "zaiheshi"; in
   # replicates the default behaviour.
   networking = {
     hostName = "nixos"; # Define your hostname.
-    useDHCP = false;
-    interfaces."enp0s3".useDHCP = true;
+    networkmanager.enable = true;
   };
 
 

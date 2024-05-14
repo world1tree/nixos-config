@@ -39,9 +39,9 @@
     in
     {
       templates = {
-        starter-with-secrets = {
-          path = ./templates/starter-with-secrets;
-          description = "Starter configuration with secrets";
+        starter = {
+          path = ./templates/starter;
+          description = "Starter configuration";
         };
       };
       apps = nixpkgs.lib.genAttrs linuxSystems mkLinuxApps;

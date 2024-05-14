@@ -36,6 +36,7 @@
         inherit system;
         specialArgs = inputs;
         modules = [
+          ./hardware-configuration.nix
           disko.nixosModules.disko
           home-manager.nixosModules.home-manager {
             home-manager = {
