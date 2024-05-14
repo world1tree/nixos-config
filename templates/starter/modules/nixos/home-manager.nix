@@ -79,5 +79,5 @@ in
     ssh = {
       enable = true;
     };
-  }
+  };
 }
