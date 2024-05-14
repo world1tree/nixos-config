@@ -61,10 +61,10 @@ let user = "%USER%";
   };
 
   services = {
-    xserver = {
-      enable = true;
-      desktopManager.plasma5.enable = true;
-      displayManager.sddm.enable = true;
+    # xserver = {
+      # enable = true;
+      # desktopManager.plasma5.enable = true;
+      # displayManager.sddm.enable = true;
 
       # Uncomment these for AMD or Nvidia GPU
       # videoDrivers = [ "amdgpu" ];
@@ -81,11 +81,11 @@ let user = "%USER%";
       # LightDM Display Manager
 
       # Turn Caps Lock into Ctrl
-      layout = "us";
+      # layout = "us";
 
       # Better support for general peripherals
-      libinput.enable = true;
-    };
+      # libinput.enable = true;
+    # };
 
     # Let's be able to SSH into this machine
     openssh.enable = true;
