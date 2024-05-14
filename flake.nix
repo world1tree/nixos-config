@@ -47,16 +47,12 @@
     in
     {
       # templates并不是为linux准备的
-      # templates = {
-        # starter = {
-          # path = ./templates/starter;
-          # description = "Starter configuration";
-        # };
-        # starter-with-secrets = {
-          # path = ./templates/starter-with-secrets;
-          # description = "Starter configuration with secrets";
-        # };
-      # };
+      templates = {
+        starter-with-secrets = {
+          path = ./templates/starter-with-secrets;
+          description = "Starter configuration with secrets";
+        };
+      };
       devShells = forAllSystems devShell;
       apps = nixpkgs.lib.genAttrs linuxSystems mkLinuxApps;
       nixosConfigurations = nixpkgs.lib.genAttrs linuxSystems (system:
