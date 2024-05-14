@@ -1,14 +1,9 @@
-{ config, inputs, pkgs, agenix, ... }:
+{ config, inputs, pkgs, ... }:
 
-let user = "zaiheshi";
-    keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOk8iAnIaa1deoc7jw8YACPNVka1ZFJxhnU4G74TmS+p" ]; in
+let user = "zaiheshi"; in
 {
   imports = [
-    ../../modules/nixos/secrets.nix
     ../../modules/nixos/disk-config.nix
-    ../../modules/shared
-    ../../modules/shared/cachix
-    agenix.nixosModules.default
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -39,15 +34,19 @@ let user = "zaiheshi";
     interfaces."enp0s3".useDHCP = true;
   };
 
-  # Turn on flag for proprietary software
-  nix = {
-    nixPath = [ "nixos-config=/home/${user}/.local/share/src/nixos-config:/etc/nixos" ];
-    settings.allowed-users = [ "${user}" ];
-    package = pkgs.nix;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-   };
+
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+    };
+    overlays =
+      # Apply each overlay found in the /overlays directory
+      let path = ../../overlays; in with builtins;
+      map (n: import (path + ("/" + n)))
+          (filter (n: match ".*\\.nix" n != null ||
+                      pathExists (path + ("/" + n + "/default.nix")))
+                  (attrNames (readDir path)));
+  };
 
   # Manages keys and such
   programs = {
@@ -117,12 +116,8 @@ let user = "zaiheshi";
         "wheel" # Enable ‘sudo’ for the user.
       ];
       shell = pkgs.zsh;
-      openssh.authorizedKeys.keys = keys;
     };
 
-    root = {
-      openssh.authorizedKeys.keys = keys;
-    };
   };
 
   # Don't require password for users in `wheel` group for these commands
@@ -143,9 +138,10 @@ let user = "zaiheshi";
   # ];
 
   environment.systemPackages = with pkgs; [
-    agenix.packages."${pkgs.system}".default # "x86_64-linux"
     git
   ];
 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.substituters = lib.mkForce ["https://mirrors.ustc.edu.cn/nix-channels/store" ];
   system.stateVersion = "23.11"; # Don't change this
 }
