@@ -13,5 +13,5 @@ shared-packages ++ [
   xclip # For the org-download package in Emacs
 
   # Other utilities
-  brave
+  # brave
 ]

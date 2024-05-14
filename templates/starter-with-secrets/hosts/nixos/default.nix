@@ -139,15 +139,8 @@ let user = "%USER%";
     }];
   };
 
-  fonts.packages = with pkgs; [
-    dejavu_fonts
-    emacs-all-the-icons-fonts
-    feather-font # from overlay
-    jetbrains-mono
-    font-awesome
-    noto-fonts
-    noto-fonts-emoji
-  ];
+  # fonts.packages = with pkgs; [
+  # ];
 
   environment.systemPackages = with pkgs; [
     agenix.packages."${pkgs.system}".default # "x86_64-linux"
