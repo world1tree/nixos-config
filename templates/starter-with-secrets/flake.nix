@@ -14,7 +14,7 @@
   };
   outputs = { self, nixpkgs, agenix, home-manager, disko } @inputs:
     let
-      user = "%USER%";
+      user = "zaiheshi";
       linuxSystems = [ "x86_64-linux" "aarch64-linux" ];
       forAllSystems = f: nixpkgs.lib.genAttrs linuxSystems f;
       devShell = system: let pkgs = nixpkgs.legacyPackages.${system}; in {
