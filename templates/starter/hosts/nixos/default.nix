@@ -1,4 +1,4 @@
-{ config, inputs, pkgs, ... }:
+{ config, lib, inputs, pkgs, ... }:
 
 let user = "zaiheshi"; in
 {
