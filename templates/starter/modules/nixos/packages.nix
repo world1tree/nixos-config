@@ -9,4 +9,12 @@ with pkgs; [
   unzip
   tree
   xclip
+  acpi
+  jq
+  lf
+  feh
+
+  dmenu
+  scrot
+  brave
 ]

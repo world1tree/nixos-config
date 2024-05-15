@@ -49,7 +49,15 @@ let user = "zaiheshi"; in
       enableCompletion = true;
       autosuggestions.enable = true;
       syntaxHighlighting.enable = true;
+      histSize = 5000;
+
+      ohMyZsh = {
+        enable = true;
+        theme = "robbyrussell";
+        plugins = [ "git" ];
+      };
     };
+
 
     gnupg.agent.enable = true;
 
@@ -58,10 +66,14 @@ let user = "zaiheshi"; in
   };
 
   services = {
-    # xserver = {
-      # enable = true;
+    xserver = {
+      enable = true;
       # desktopManager.plasma5.enable = true;
-      # displayManager.sddm.enable = true;
+      windowManager.bspwm.enable = true;
+      displayManager.sddm.enable = true;
+
+      layout = "us";
+      xkbVariant = "workman";
 
       # Uncomment these for AMD or Nvidia GPU
       # videoDrivers = [ "amdgpu" ];
@@ -82,15 +94,15 @@ let user = "zaiheshi"; in
 
       # Better support for general peripherals
       # libinput.enable = true;
-    # };
+    };
 
     # Let's be able to SSH into this machine
     openssh.enable = true;
-
   };
 
   # Enable sound
-  # sound.enable = true;
+  sound.enable = true;
+  hardware.brillo.enable = true;
   # hardware.pulseaudio.enable = true;
 
   # Video support
@@ -137,7 +149,17 @@ let user = "zaiheshi"; in
 
   environment.systemPackages = with pkgs; [
     git
+    libnotify
   ];
+
+  i18n.inputMethod = {
+    enabled = "fcitx5";
+    fcitx5.addons = with pkgs; [
+      fcitx5-rime
+      fcitx5-chinese-addons
+      fcitx5-configtool
+    ];
+  };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.substituters = lib.mkForce ["https://mirrors.ustc.edu.cn/nix-channels/store" ];
