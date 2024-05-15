@@ -16,13 +16,6 @@ in
 
   programs = {
     gpg.enable = true; 
-    # Shared shell configuration
-    zsh = {
-      enable = true;
-      enableCompletion = true;
-      # autosuggestions.enable = true;
-      # syntaxHighlighting.enable = true;
-    };
 
     git = {
       enable = true;
@@ -75,9 +68,5 @@ in
         nnoremap j gj
         '';
        };
-
-    ssh = {
-      enable = true;
-    };
   };
 }

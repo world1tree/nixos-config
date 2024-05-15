@@ -49,13 +49,17 @@ let user = "zaiheshi"; in
 
   # Manages keys and such
   programs = {
+    zsh = {
+      enable = true;
+      enableCompletion = true;
+      autosuggestions.enable = true;
+      syntaxHighlighting.enable = true;
+    };
+
     gnupg.agent.enable = true;
 
     # Needed for anything GTK related
     dconf.enable = true;
-
-    # My shell
-    zsh.enable = true;
   };
 
   services = {
